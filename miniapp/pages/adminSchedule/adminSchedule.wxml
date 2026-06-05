@@ -1,0 +1,86 @@
+<view class="page" style="padding:16px;">
+  <!-- 周模板 -->
+  <view class="card" style="padding:16px;">
+    <view class="section-title">📅 周模板</view>
+    <view class="note-text">点击每天可设置该天的上课时间段</view>
+    <view wx:for="{{weekDisplays}}" wx:key="day" class="schedule-row" data-day="{{item.day}}" bindtap="editWeekDay">
+      <text class="day-label">{{item.name}}</text>
+      <text wx:if="{{!item.hasVal}}" style="flex:1;font-size:13px;color:#999;">未设置</text>
+      <text wx:else style="flex:1;font-size:13px;">{{item.text}}</text>
+      <text style="font-size:18px;">✏️</text>
+    </view>
+    <button class="btn btn-primary mt-12" bindtap="saveWeekConfig">保存周模板</button>
+  </view>
+
+  <!-- 按日排课 -->
+  <view class="card" style="padding:16px;margin-top:12px;">
+    <view class="section-title">📆 按日单独排课</view>
+    <view style="display:flex;align-items:center;justify-content:center;gap:16px;margin:10px 0;">
+      <text class="calendar-nav-btn" bindtap="chMonth" data-d="{{-1}}" style="font-size:24px;">‹</text>
+      <text style="font-weight:600;font-size:16px;">{{schedYear}}年{{schedMonth+1}}月</text>
+      <text class="calendar-nav-btn" bindtap="chMonth" data-d="{{1}}" style="font-size:24px;">›</text>
+    </view>
+    <view class="calendar-grid">
+      <view class="day-header" wx:for="{{DAY_NM}}" wx:key="*this">{{item}}</view>
+      <view wx:for="{{calDates}}" wx:key="date" class="{{item.cls}}" data-date="{{item.date}}" bindtap="editDate">
+        <text>{{item.day}}</text>
+      </view>
+    </view>
+    <text style="font-size:12px;color:#999;display:block;text-align:center;margin-top:8px;">点击日期可单独设置排课（留空则使用周模板）</text>
+  </view>
+
+  <!-- 时段编辑面板 -->
+  <view class="card" style="padding:16px;margin-top:12px;" wx:if="{{editing}}">
+    <view class="flex-between">
+      <text class="section-title">{{editTitle}}</text>
+      <text bindtap="cancelEdit" style="color:#999;padding:4px 8px;">取消</text>
+    </view>
+
+    <!-- 已有时间段列表 -->
+    <view wx:if="{{editRanges.length === 0}}" style="color:#999;font-size:13px;padding:8px 0;">暂无时间段</view>
+    <view wx:for="{{editRanges}}" wx:key="index" style="display:flex;align-items:center;padding:8px 0;border-bottom:1px solid #f0f0f0;font-size:14px;">
+      <text style="margin-right:8px;">{{item.start_time}} - {{item.end_time}}</text>
+      <text style="color:#e64340;padding:0 8px;" data-idx="{{index}}" bindtap="removeRange">删除</text>
+    </view>
+
+    <!-- 添加时间段 -->
+    <view style="margin-top:12px;padding-top:12px;border-top:1px solid #eee;">
+      <text style="font-size:13px;color:#666;display:block;margin-bottom:8px;">添加时间段</text>
+      <view style="display:flex;align-items:center;gap:8px;">
+        <picker mode="time" value="{{editStart}}" bindchange="onEditStartChange">
+          <view class="time-pick-btn">{{editStart}}</view>
+        </picker>
+        <text>至</text>
+        <picker mode="time" value="{{editEnd}}" bindchange="onEditEndChange">
+          <view class="time-pick-btn">{{editEnd}}</view>
+        </picker>
+        <button class="btn btn-sm btn-primary" bindtap="addRange" style="margin:0;">添加</button>
+      </view>
+    </view>
+
+    <button class="btn btn-primary mt-12" bindtap="saveEdit">✅ 保存</button>
+  </view>
+
+  <!-- 特殊日期 -->
+  <view class="card" style="padding:16px;margin-top:12px;">
+    <view class="section-title">特殊日期</view>
+    <view wx:if="{{specialDates.length===0}}" style="color:#999;padding:8px 0;font-size:13px;">暂无</view>
+    <view wx:for="{{specialDates}}" wx:key="date" wx:for-item="d" style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid #eee;font-size:13px;">
+      <text>{{d.date}}</text>
+      <text class="badge {{d.is_off?'badge-red':'badge-green'}}">{{d.is_off?'停课':'补课'}}</text>
+      <text style="color:#999;font-size:12px;">{{d.note||""}}</text>
+      <text style="padding:4px;" data-date="{{d.date}}" bindtap="delSpec">🗑️</text>
+    </view>
+    <view style="margin-top:12px;">
+      <view class="input-group"><text class="input-label">日期</text><input class="input-field" type="text" placeholder="YYYY-MM-DD" value="{{specDate}}" bindinput="onSpecDate"/></view>
+      <view class="input-group">
+        <text class="input-label">类型</text>
+        <picker mode="selector" range="{{['补课','停课']}}" bindchange="onSpecType">
+          <view class="input-field" style="line-height:44px;">{{specOff==='1'?'停课':'补课'}}</view>
+        </picker>
+      </view>
+      <view class="input-group"><text class="input-label">备注</text><input class="input-field" placeholder="如：清明节" value="{{specNote}}" bindinput="onSpecNote"/></view>
+      <button class="btn btn-primary" bindtap="addSpec">添加</button>
+    </view>
+  </view>
+</view>
