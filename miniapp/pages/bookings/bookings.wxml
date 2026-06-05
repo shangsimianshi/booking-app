@@ -1,0 +1,37 @@
+<view class="page">
+  <view class="section-title">我的预约</view>
+
+  <view wx:if="{{loading}}" class="loading">
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <view wx:elif="{{bookings.length === 0}}" class="empty-state">
+    <text class="empty-icon">📅</text>
+    <text class="empty-text">暂无预约记录</text>
+  </view>
+
+  <view wx:else>
+    <view class="booking-card card" wx:for="{{bookings}}" wx:key="id" wx:for-item="b">
+      <view class="booking-header flex-between">
+        <text class="booking-date">{{util.fmtDisplay(b.date)}}</text>
+        <text class="badge
+          {{b.status == 'confirmed' ? 'badge-green' : ''}}
+          {{b.status == 'completed' ? 'badge-gray' : ''}}
+          {{b.status == 'cancelled' ? 'badge-red' : ''}}
+        ">
+          {{b.status == 'confirmed' ? '已预约' : ''}}
+          {{b.status == 'completed' ? '已完成' : ''}}
+          {{b.status == 'cancelled' ? '已取消' : ''}}
+        </text>
+      </view>
+      <view class="booking-body">
+        <text class="booking-time">⏰ {{b.start_time}}</text>
+        <text class="booking-note" wx:if="{{b.note}}">📝 {{b.note}}</text>
+      </view>
+      <view class="booking-actions">
+        <text class="text-sm text-muted">💬 老师微信：shangsimianshi</text>
+        <button class="btn btn-small btn-outline-danger" bindtap="cancelBooking" data-id="{{b.id}}">取消</button>
+      </view>
+    </view>
+  </view>
+</view>
