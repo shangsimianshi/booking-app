@@ -1,0 +1,37 @@
+.page {
+  padding-bottom: 20px;
+}
+
+.admin-booking-card {
+  margin-bottom: 8px;
+}
+
+.admin-booking-name {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+}
+
+.admin-booking-phone {
+  display: block;
+  font-size: 13px;
+  color: #1a73e8;
+  margin-top: 2px;
+}
+
+.admin-booking-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 8px;
+  font-size: 13px;
+  color: #666;
+}
+
+.admin-booking-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
