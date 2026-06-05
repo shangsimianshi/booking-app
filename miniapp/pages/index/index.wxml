@@ -1,0 +1,63 @@
+<view class="login-page">
+  <!-- Student Mode -->
+  <block wx:if="{{mode === 'student'}}">
+    <view class="login-logo">🐟</view>
+    <view class="login-title">鱼快尚岸面试约课系统</view>
+    <view class="login-subtitle">一对一结构化面试辅导</view>
+    <view class="login-form">
+      <view class="input-group">
+        <text class="input-label">姓名</text>
+        <input class="input-field" placeholder="请输入你的姓名" value="{{name}}" bindinput="onNameInput" />
+      </view>
+      <view class="input-group">
+        <text class="input-label">手机号</text>
+        <input class="input-field" type="number" maxlength="11" placeholder="请输入手机号" value="{{phone}}" bindinput="onPhoneInput" />
+      </view>
+      <button class="btn btn-primary" bindtap="doLogin">登录</button>
+    </view>
+    <view class="login-toggle" bindtap="switchMode">👨‍🏫 教师登录</view>
+  </block>
+
+  <!-- Teacher Mode -->
+  <block wx:elif="{{mode === 'teacher'}}">
+    <view class="login-logo">👨‍🏫</view>
+    <view class="login-title">教师登录</view>
+    <view class="login-form">
+      <view class="input-group">
+        <text class="input-label">手机号</text>
+        <input class="input-field" type="number" maxlength="11" placeholder="请输入手机号" value="{{phone}}" bindinput="onPhoneInput" />
+      </view>
+      <view class="input-group">
+        <text class="input-label">密码</text>
+        <input class="input-field" password="{{true}}" placeholder="请输入密码" value="{{password}}" bindinput="onPasswordInput" />
+      </view>
+      <button class="btn btn-primary" bindtap="doTeacherLogin">登录</button>
+    </view>
+    <view class="login-toggle" bindtap="switchToRegister">📝 教师注册</view>
+    <view class="login-toggle" bindtap="switchToStudent">🐟 学生登录</view>
+  </block>
+
+  <!-- Register Mode -->
+  <block wx:else>
+    <view class="login-logo">📝</view>
+    <view class="login-title">教师注册</view>
+    <view class="login-form">
+      <view class="input-group">
+        <text class="input-label">姓名</text>
+        <input class="input-field" placeholder="请输入姓名" value="{{name}}" bindinput="onNameInput" />
+      </view>
+      <view class="input-group">
+        <text class="input-label">手机号</text>
+        <input class="input-field" type="number" maxlength="11" placeholder="请输入手机号" value="{{phone}}" bindinput="onPhoneInput" />
+      </view>
+      <view class="input-group">
+        <text class="input-label">密码</text>
+        <input class="input-field" password="{{true}}" placeholder="请设置密码（至少6位）" value="{{password}}" bindinput="onPasswordInput" />
+      </view>
+      <button class="btn btn-primary" bindtap="doRegister">注册</button>
+    </view>
+    <view class="login-toggle" bindtap="switchToTeacher">👨‍🏫 已有账号？去登录</view>
+  </block>
+
+  <view class="login-note">💡 本系统仅收取定金，课时费请于课后直接发给老师</view>
+</view>
