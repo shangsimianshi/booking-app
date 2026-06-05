@@ -1,0 +1,40 @@
+<view class="page">
+  <!-- Streak -->
+  <view class="card streak-card">
+    <view class="streak-value">{{streak}}</view>
+    <text class="streak-label">连续打卡天数</text>
+    <button class="btn btn-primary mt-12" wx:if="{{!checkedInToday}}" bindtap="doCheckin">今日打卡 ✅</button>
+    <view class="badge badge-green mt-8" wx:else>今日已打卡 ✓</view>
+  </view>
+
+  <!-- Monthly Calendar with Check Marks -->
+  <view class="card">
+    <view class="calendar-header">
+      <view class="calendar-nav-btn" bindtap="prevMonth">‹</view>
+      <text class="month-text">{{checkinYear}}年{{checkinMonth}}月</text>
+      <view class="calendar-nav-btn" bindtap="nextMonth">›</view>
+    </view>
+    <view class="calendar-grid">
+      <view class="day-header" wx:for="{{weekHeaders}}" wx:key="*this">{{item}}</view>
+      <view
+        class="day-cell {{item.isToday ? 'today' : ''}}"
+        wx:for="{{checkinDates}}" wx:key="index"
+      >
+        <text>{{item.day}}</text>
+        <text wx:if="{{item.checked}}" style="color:#07c160;font-size:16px;">✓</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- Recent Check-ins -->
+  <view class="section-title">最近打卡</view>
+  <view wx:if="{{recentCheckins.length === 0}}" class="empty-state">
+    <text class="empty-text">暂无打卡记录</text>
+  </view>
+  <view wx:else class="card">
+    <view class="checkin-item flex-between" wx:for="{{recentCheckins}}" wx:key="id" wx:for-item="c">
+      <text class="checkin-name">{{c.name}}</text>
+      <text class="checkin-time text-muted text-sm">{{util.timeAgo(c.created_at)}}</text>
+    </view>
+  </view>
+</view>
