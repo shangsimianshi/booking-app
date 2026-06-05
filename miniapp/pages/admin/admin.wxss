@@ -1,0 +1,59 @@
+.page {
+  padding-bottom: 40px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 0 16px;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 20px 12px;
+}
+
+.stat-value {
+  display: block;
+  font-size: 28px;
+  font-weight: 700;
+  color: #07c160;
+  line-height: 1.2;
+}
+
+.stat-label {
+  display: block;
+  font-size: 12px;
+  color: #999;
+  margin-top: 4px;
+}
+
+.admin-menu {
+  padding: 0 16px;
+}
+
+.menu-item {
+  margin-bottom: 8px;
+  padding: 14px 16px;
+  border-radius: 10px;
+}
+
+.menu-icon {
+  font-size: 22px;
+}
+
+.menu-text {
+  font-size: 15px;
+  color: #333;
+  font-weight: 500;
+}
+
+.menu-arrow {
+  font-size: 20px;
+  color: #ccc;
+}
+
+.logout-section {
+  padding: 40px 16px;
+}
