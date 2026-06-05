@@ -1,0 +1,66 @@
+<view class="page">
+  <view class="section-title">数据概览</view>
+
+  <view wx:if="{{loading}}" class="loading">
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <view wx:else class="stats-grid">
+    <view class="stat-item card-no-margin">
+      <text class="stat-value">{{stats.total_bookings || 0}}</text>
+      <text class="stat-label">总预约数</text>
+    </view>
+    <view class="stat-item card-no-margin">
+      <text class="stat-value">{{stats.today_bookings || 0}}</text>
+      <text class="stat-label">今日预约</text>
+    </view>
+    <view class="stat-item card-no-margin">
+      <text class="stat-value">{{stats.pending_bookings || 0}}</text>
+      <text class="stat-label">待确认</text>
+    </view>
+    <view class="stat-item card-no-margin">
+      <text class="stat-value">{{stats.total_students || 0}}</text>
+      <text class="stat-label">学生总数</text>
+    </view>
+  </view>
+
+  <view class="section-title">管理功能</view>
+
+  <view class="admin-menu">
+    <view class="menu-item card flex-between" bindtap="goToBookings">
+      <view class="flex-row" style="gap:10px;">
+        <text class="menu-icon">📋</text>
+        <text class="menu-text">预约管理</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+
+    <view class="menu-item card flex-between" bindtap="goToSchedule">
+      <view class="flex-row" style="gap:10px;">
+        <text class="menu-icon">🗓️</text>
+        <text class="menu-text">排课设置</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+
+    <view class="menu-item card flex-between" bindtap="goToConfig">
+      <view class="flex-row" style="gap:10px;">
+        <text class="menu-icon">⚙️</text>
+        <text class="menu-text">课程配置</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+
+    <view class="menu-item card flex-between" bindtap="goToCheckins">
+      <view class="flex-row" style="gap:10px;">
+        <text class="menu-icon">📊</text>
+        <text class="menu-text">打卡统计</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+  </view>
+
+  <view class="logout-section">
+    <button class="btn btn-outline-danger" bindtap="doLogout">退出登录</button>
+  </view>
+</view>
