@@ -1,0 +1,78 @@
+<view class="page">
+  <!-- WeChat Banner -->
+  <view class="wechat-banner card">
+    <view class="flex-row">
+      <text class="wechat-icon">💬</text>
+      <view class="flex-1">
+        <text class="wechat-label">老师微信</text>
+        <text class="wechat-id">{{teacherWechat || 'shangsimianshi'}}</text>
+      </view>
+      <button class="btn btn-small {{wechatConfirmed ? 'btn-outline' : 'btn-primary'}}" bindtap="confirmWechat" wx:if="{{!wechatConfirmed}}">已添加</button>
+      <text class="badge badge-green" wx:else>✅ 已添加</text>
+    </view>
+  </view>
+
+  <!-- Calendar -->
+  <view class="card">
+    <view class="calendar-header">
+      <view class="calendar-nav-btn" bindtap="prevMonth">‹</view>
+      <text class="month-text">{{currentYear}}年{{currentMonth}}月</text>
+      <view class="calendar-nav-btn" bindtap="nextMonth">›</view>
+    </view>
+    <view class="calendar-grid">
+      <view class="day-header" wx:for="{{weekHeaders}}" wx:key="*this">{{item}}</view>
+      <view
+        class="day-cell {{item.isToday ? 'today' : ''}} {{item.isSelected ? 'selected' : ''}} {{item.isCurrentMonth ? '' : 'other-month'}}"
+        wx:for="{{calendarDates}}" wx:key="index"
+        data-date="{{item.date}}"
+        bindtap="selectDate"
+      >
+        <text>{{item.day}}</text>
+        <view class="dot" wx:if="{{item.hasSlots}}"></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- Selected Date Time Slots -->
+  <view class="card" wx:if="{{selectedDate}}">
+    <view class="flex-between">
+      <text class="section-title" style="padding:0;margin:0">{{util.fmtDisplay(selectedDate)}}</text>
+    </view>
+
+    <view wx:if="{{slotsLoading}}" class="loading">
+      <text class="loading-text">加载中...</text>
+    </view>
+
+    <view wx:elif="{{slots.length === 0}}" class="empty-state" style="padding:20px 0">
+      <text class="empty-text">暂无可用时段</text>
+    </view>
+
+    <view wx:else>
+      <view class="time-slots">
+        <view
+          class="time-slot-item {{item.selected ? 'selected' : ''}} {{item.slot_status === 'booked' || item.slot_status === 'locked' ? 'booked' : ''}}"
+          wx:for="{{slots}}" wx:key="start_time"
+          data-slot="{{item.start_time}}"
+          catchtap="onSlotTap"
+        >
+          <text class="slot-label">{{item.start_time}}</text>
+          <text class="slot-status" wx:if="{{item.slot_status === 'booked'}}">已预约</text>
+          <text class="slot-status" wx:elif="{{item.slot_status === 'locked'}}">已预约</text>
+          <text class="slot-check" wx:elif="{{item.selected}}">✓</text>
+        </view>
+      </view>
+
+      <!-- Summary & Booking -->
+      <view wx:if="{{selectedSlots.length > 0}}" class="mt-12" style="padding:12px;background:#f9f9f9;border-radius:8px;">
+        <text class="text-sm">已选 {{selectedSlots.length}} 个时段</text>
+        <view class="input-group mt-8">
+          <textarea class="input-field" placeholder="如有特殊需求请备注..." value="{{note}}" bindinput="onNoteInput" maxlength="200" style="min-height:60px;" />
+        </view>
+        <button class="btn btn-primary mt-8" bindtap="confirmBooking">立即预约</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- WeChat Note -->
+  <view class="payment-note">💡 预约后请添加老师微信：shangsimianshi，课时费课后直接发给老师</view>
+</view>
