@@ -1,0 +1,22 @@
+<view class="page">
+  <view class="section-title">课程配置</view>
+  <view class="card">
+    <view class="input-group">
+      <text class="input-label">课程单价（元）</text>
+      <input class="input-field" type="digit" placeholder="请输入课程单价" value="{{price}}" bindinput="onPriceInput" />
+    </view>
+    <view class="input-group">
+      <text class="input-label">定金金额（元）</text>
+      <input class="input-field" type="digit" placeholder="请输入定金金额" value="{{deposit}}" bindinput="onDepositInput" />
+    </view>
+    <view class="input-group">
+      <text class="input-label">教师姓名</text>
+      <input class="input-field" placeholder="请输入教师姓名" value="{{teacherName}}" bindinput="onTeacherNameInput" />
+    </view>
+    <view class="input-group">
+      <text class="input-label">教师微信</text>
+      <input class="input-field" placeholder="请输入教师微信号" value="{{teacherWechat}}" bindinput="onTeacherWechatInput" />
+    </view>
+    <button class="btn btn-primary" bindtap="saveConfig">保存配置</button>
+  </view>
+</view>
