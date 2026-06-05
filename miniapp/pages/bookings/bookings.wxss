@@ -1,0 +1,46 @@
+.page {
+  padding-bottom: 20px;
+}
+
+.booking-card {
+  margin-bottom: 10px;
+}
+
+.booking-header {
+  margin-bottom: 8px;
+}
+
+.booking-date {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+}
+
+.booking-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.booking-time {
+  font-size: 14px;
+  color: #666;
+}
+
+.booking-note {
+  font-size: 13px;
+  color: #999;
+}
+
+.booking-deposit {
+  font-size: 13px;
+  color: #f5a623;
+  font-weight: 500;
+}
+
+.booking-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  justify-content: flex-end;
+}
