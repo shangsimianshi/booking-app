@@ -1,0 +1,25 @@
+<view class="page">
+  <view class="card" style="text-align:center;padding:24px 16px;">
+    <view class="avatar">{{user.name.slice(0,1)}}</view>
+    <text>{{user.name}}</text>
+    <text>{{user.phone}}</text>
+    <view wx:if="{{isTeacher}}">教师</view>
+    <view wx:if="{{!isTeacher}}">学生</view>
+  </view>
+  <view class="card" wx:if="{{!isTeacher}}">
+    <view>学习统计</view>
+    <view>{{checkinStats.streak}} 连续打卡</view>
+    <view>{{checkinStats.total_days}} 累计打卡</view>
+    <view>{{bookingCount}} 预约数</view>
+  </view>
+  <view wx:if="{{!isTeacher}}">
+    <view bindtap="goToMyBookings">我的预约</view>
+  </view>
+  <view wx:if="{{isTeacher}}">
+    <view bindtap="goToAdminBookings">预约管理</view>
+    <view bindtap="goToAdminSchedule">排课设置</view>
+    <view bindtap="goToAdminCheckins">打卡统计</view>
+    <view bindtap="goToAdminConfig">系统设置</view>
+  </view>
+  <button bindtap="doLogout">退出登录</button>
+</view>
