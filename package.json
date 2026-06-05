@@ -1,0 +1,17 @@
+{
+  "name": "booking-app",
+  "version": "1.0.0",
+  "description": "结构化面试约课系统",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "bcryptjs": "^2.4.3",
+    "uuid": "^9.0.0",
+    "cors": "^2.8.5"
+  }
+}
