@@ -1,0 +1,34 @@
+<view class="page">
+  <view class="flex-between" style="padding:12px 16px 0;">
+    <text class="section-title" style="padding:0;margin:0;">消息中心</text>
+    <view class="flex-row" style="gap:6px;">
+      <button class="btn btn-small btn-outline-danger" wx:if="{{notifications.length > 0}}" bindtap="deleteAll">清除全部</button>
+      <button class="btn btn-small btn-outline" wx:if="{{notifications.length > 0}}" bindtap="readAll">全部已读</button>
+    </view>
+  </view>
+
+  <view wx:if="{{loading}}" class="loading">
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <view wx:elif="{{notifications.length === 0}}" class="empty-state">
+    <text class="empty-icon">🔔</text>
+    <text class="empty-text">暂无消息</text>
+  </view>
+
+  <view wx:else class="mt-8">
+    <view class="notif-card card" wx:for="{{notifications}}" wx:key="id" wx:for-item="n">
+      <view class="flex-between" bindtap="readNotif" data-id="{{n.id}}">
+        <view class="flex-row" style="gap:6px;flex:1;">
+          <text class="notif-title {{n.is_read ? '' : 'text-bold'}}">{{n.title}}</text>
+          <text class="badge badge-red" wx:if="{{!n.is_read}}">新</text>
+        </view>
+        <text class="text-sm text-muted">{{util.timeAgo(n.created_at)}}</text>
+      </view>
+      <view class="flex-between">
+        <text class="notif-body" style="flex:1;">{{n.message}}</text>
+        <text class="del-notif" bindtap="deleteOne" data-id="{{n.id}}">🗑️</text>
+      </view>
+    </view>
+  </view>
+</view>
