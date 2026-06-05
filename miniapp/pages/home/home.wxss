@@ -1,0 +1,80 @@
+.page {
+  padding-bottom: 20px;
+}
+
+.wechat-banner .flex-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wechat-icon {
+  font-size: 28px;
+}
+
+.wechat-label {
+  display: block;
+  font-size: 12px;
+  color: #999;
+}
+
+.wechat-id {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-top: 2px;
+}
+
+.payment-note {
+  text-align: center;
+  font-size: 12px;
+  color: #999;
+  padding: 16px;
+  line-height: 1.6;
+}
+
+.card .section-title {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.time-slots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px 0;
+}
+
+.time-slot-item {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  border: 1px solid #e0e0e0;
+  color: #333;
+  background: #fff;
+  text-align: center;
+  min-width: 80px;
+}
+
+.time-slot-item:active {
+  opacity: 0.7;
+}
+
+.time-slot-item.selected {
+  background-color: #07c160;
+  color: #fff;
+  border-color: #07c160;
+}
+
+.time-slot-item.disabled {
+  background-color: #f5f5f5;
+  color: #ccc;
+  border-color: #eee;
+}
+
+.time-slot-item.booked {
+  background-color: #fff7e6;
+  color: #f5a623;
+  border-color: #f5a623;
+}
